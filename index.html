@@ -9,20 +9,15 @@
   <style>
     :root {
       --bg: #f5f5f7;
-      --bg-2: #ffffff;
       --text: #0f1115;
       --muted: #6e7381;
       --line: rgba(15, 17, 21, 0.08);
-      --line-strong: rgba(15, 17, 21, 0.14);
       --glass: rgba(255, 255, 255, 0.72);
       --shadow: 0 20px 60px rgba(17, 24, 39, 0.10);
       --shadow-soft: 0 10px 30px rgba(17, 24, 39, 0.06);
-      --radius-xl: 32px;
-      --radius-lg: 22px;
-      --radius-md: 16px;
-      --container: 1180px;
       --mx: 50%;
       --my: 50%;
+      --container: 1180px;
     }
 
     * {
@@ -43,7 +38,7 @@
         radial-gradient(circle at 85% 12%, rgba(166, 109, 255, 0.14), transparent 24%),
         radial-gradient(circle at 50% 100%, rgba(255, 177, 95, 0.12), transparent 30%),
         linear-gradient(180deg, #fbfbfd 0%, #f2f3f7 100%);
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     body::before {
@@ -107,7 +102,7 @@
     }
 
     .noise {
-      opacity: 0.045;
+      opacity: 0.04;
       background-image:
         radial-gradient(circle at 20% 20%, #000 0.5px, transparent 0.8px),
         radial-gradient(circle at 70% 55%, #000 0.5px, transparent 0.8px),
@@ -120,14 +115,16 @@
       z-index: 1;
       width: min(calc(100% - 32px), var(--container));
       margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     .nav {
+      padding: 20px 0;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 20px 0;
+      justify-content: flex-start;
     }
 
     .brand {
@@ -168,34 +165,16 @@
       font-size: 0.84rem;
     }
 
-    .nav-link {
-      text-decoration: none;
-      color: var(--text);
-      padding: 12px 16px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.72);
-      border: 1px solid rgba(15, 17, 21, 0.08);
-      box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(12px);
-      transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
-    }
-
-    .nav-link:hover {
-      transform: translateY(-1px);
-      border-color: var(--line-strong);
-      background: rgba(255,255,255,0.86);
-    }
-
     .hero {
-      min-height: calc(100vh - 84px);
+      flex: 1;
       display: grid;
       place-items: center;
       text-align: center;
-      padding: 40px 0 80px;
+      padding: 20px 0 80px;
     }
 
     .hero-inner {
-      max-width: 980px;
+      max-width: 920px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -226,14 +205,20 @@
 
     h1 {
       margin: 0;
-      font-size: clamp(4rem, 11vw, 8.8rem);
-      line-height: 0.88;
-      letter-spacing: -0.10em;
-      font-weight: 700;
+      font-size: clamp(4rem, 11vw, 8.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.055em;
+      font-weight: 800;
+      padding: 0.04em 0 0.10em;
+      text-wrap: balance;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     .title-gradient {
-      background: linear-gradient(180deg, #0f1115 0%, #1a2333 58%, #3b4660 100%);
+      display: inline-block;
+      background: linear-gradient(180deg, #111827 0%, #2a3346 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -241,25 +226,14 @@
 
     .subtitle {
       margin: 22px 0 0;
-      font-size: clamp(1.1rem, 2.3vw, 1.5rem);
+      font-size: clamp(1.1rem, 2.2vw, 1.45rem);
       line-height: 1.45;
       color: #2b3240;
       letter-spacing: -0.03em;
-      max-width: 24ch;
+      max-width: 22ch;
     }
 
-    .caption {
-      margin: 14px 0 0;
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.8;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      justify-content: center;
+    .cta {
       margin-top: 34px;
     }
 
@@ -277,21 +251,18 @@
       font-weight: 600;
       font-size: 1rem;
       letter-spacing: -0.01em;
-      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
       overflow: hidden;
+      color: white;
+      background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+      box-shadow: 0 14px 30px rgba(17, 24, 39, 0.16);
     }
 
     .btn:hover {
       transform: translateY(-1px);
     }
 
-    .btn-primary {
-      color: white;
-      background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
-      box-shadow: 0 14px 30px rgba(17, 24, 39, 0.16);
-    }
-
-    .btn-primary::before {
+    .btn::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -299,36 +270,8 @@
       transform: translateX(-130%);
     }
 
-    .btn-primary:hover::before {
+    .btn:hover::before {
       animation: sweep 1s ease;
-    }
-
-    .btn-secondary {
-      color: var(--text);
-      background: rgba(255,255,255,0.72);
-      border: 1px solid rgba(15, 17, 21, 0.08);
-      box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(12px);
-    }
-
-    .contact-card {
-      margin-top: 34px;
-      padding: 18px 22px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.66);
-      border: 1px solid rgba(15, 17, 21, 0.07);
-      backdrop-filter: blur(14px);
-      box-shadow: var(--shadow-soft);
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .contact-card strong {
-      color: var(--text);
-      font-weight: 600;
     }
 
     .footer {
@@ -349,28 +292,6 @@
       transform: translateY(0);
     }
 
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: 24px;
-      transform: translateX(-50%) translateY(10px);
-      padding: 12px 16px;
-      border-radius: 999px;
-      background: rgba(17, 24, 39, 0.92);
-      color: white;
-      font-size: 0.95rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease, transform 0.25s ease;
-      z-index: 20;
-      box-shadow: 0 16px 40px rgba(17, 24, 39, 0.22);
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
     @keyframes float {
       0%, 100% { transform: translate3d(0,0,0) scale(1); }
       50% { transform: translate3d(16px,18px,0) scale(1.05); }
@@ -386,28 +307,12 @@
     }
 
     @media (max-width: 720px) {
-      .nav-link {
-        display: none;
+      h1 {
+        font-size: clamp(3.3rem, 18vw, 5.6rem);
       }
 
-      .actions {
-        flex-direction: column;
-        width: 100%;
-        max-width: 360px;
-      }
-
-      .btn {
-        width: 100%;
-      }
-
-      .contact-card {
-        width: 100%;
-        max-width: 360px;
-        justify-content: center;
-        text-align: center;
-        border-radius: 22px;
-        flex-direction: column;
-        gap: 6px;
+      .subtitle {
+        max-width: 18ch;
       }
     }
 
@@ -441,8 +346,6 @@
           <span>doména na predaj</span>
         </div>
       </a>
-
-      <a class="nav-link" href="mailto:peter.stefanec10@gmail.com?subject=Záujem o doménu jovipoint.sk">Kontakt</a>
     </nav>
 
     <main class="hero">
@@ -455,21 +358,11 @@
         <h1><span class="title-gradient">jovipoint.sk</span></h1>
 
         <p class="subtitle">Doména na predaj.</p>
-        <p class="caption">Ak ju chcete pre svoju značku, ozvite sa.</p>
 
-        <div class="actions">
-          <a class="btn btn-primary" href="mailto:peter.stefanec10@gmail.com?subject=Záujem o doménu jovipoint.sk">
-            Napísať e-mail
+        <div class="cta">
+          <a class="btn" href="mailto:peter.stefanec10@gmail.com?subject=Záujem o doménu jovipoint.sk">
+            Kontakt
           </a>
-
-          <button class="btn btn-secondary" id="copyEmailBtn" type="button">
-            Kopírovať kontakt
-          </button>
-        </div>
-
-        <div class="contact-card">
-          <span>Kontakt</span>
-          <strong>peter.stefanec10@gmail.com</strong>
         </div>
       </div>
     </main>
@@ -477,42 +370,8 @@
     <div class="footer">jovipoint.sk</div>
   </div>
 
-  <div class="toast" id="toast">E-mail skopírovaný</div>
-
   <script>
-    const email = "peter.stefanec10@gmail.com";
-    const toast = document.getElementById("toast");
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    function showToast() {
-      toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 1800);
-    }
-
-    async function copyEmail() {
-      try {
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(email);
-          showToast();
-          return;
-        }
-
-        const helper = document.createElement("textarea");
-        helper.value = email;
-        helper.style.position = "fixed";
-        helper.style.opacity = "0";
-        document.body.appendChild(helper);
-        helper.focus();
-        helper.select();
-        document.execCommand("copy");
-        document.body.removeChild(helper);
-        showToast();
-      } catch (e) {
-        window.location.href = "mailto:" + email + "?subject=Záujem o doménu jovipoint.sk";
-      }
-    }
-
-    document.getElementById("copyEmailBtn").addEventListener("click", copyEmail);
 
     if (!prefersReducedMotion) {
       const reveal = document.querySelector(".reveal");
