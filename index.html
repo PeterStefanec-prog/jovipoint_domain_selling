@@ -4,34 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>jovipoint.sk</title>
-  <meta name="description" content="jovipoint.sk — prémiová doména na dohodu." />
+  <meta name="description" content="jovipoint.sk — doména na predaj." />
 
   <style>
     :root {
-      --bg: #050816;
-      --bg2: #0b1120;
-      --panel: rgba(255, 255, 255, 0.08);
-      --panel-2: rgba(255, 255, 255, 0.05);
-      --line: rgba(255, 255, 255, 0.11);
-      --line-strong: rgba(255, 255, 255, 0.18);
-      --text: #f7f8fc;
-      --muted: rgba(247, 248, 252, 0.66);
-      --soft: rgba(247, 248, 252, 0.46);
-      --accent: #8b5cf6;
-      --accent-2: #06b6d4;
-      --accent-3: #ff5db1;
-      --success: #8ef4b7;
-      --radius-xl: 34px;
-      --radius-lg: 24px;
-      --radius-md: 18px;
-      --shadow: 0 30px 90px rgba(0, 0, 0, 0.42);
-      --container: 1240px;
+      --bg: #f5f5f7;
+      --bg-2: #ffffff;
+      --text: #0f1115;
+      --muted: #6e7381;
+      --line: rgba(15, 17, 21, 0.08);
+      --line-strong: rgba(15, 17, 21, 0.14);
+      --glass: rgba(255, 255, 255, 0.72);
+      --shadow: 0 20px 60px rgba(17, 24, 39, 0.10);
+      --shadow-soft: 0 10px 30px rgba(17, 24, 39, 0.06);
+      --radius-xl: 32px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --container: 1180px;
       --mx: 50%;
       --my: 50%;
-      --scroll: 0;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     html {
       scroll-behavior: smooth;
@@ -40,14 +36,14 @@
     body {
       margin: 0;
       min-height: 100vh;
-      overflow-x: hidden;
       color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Inter, sans-serif;
       background:
-        radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.18), transparent 24%),
-        radial-gradient(circle at 82% 14%, rgba(6, 182, 212, 0.14), transparent 22%),
-        radial-gradient(circle at 75% 75%, rgba(255, 93, 177, 0.10), transparent 20%),
-        linear-gradient(180deg, #090f1d 0%, #050816 100%);
+        radial-gradient(circle at 15% 15%, rgba(122, 162, 255, 0.20), transparent 24%),
+        radial-gradient(circle at 85% 12%, rgba(166, 109, 255, 0.14), transparent 24%),
+        radial-gradient(circle at 50% 100%, rgba(255, 177, 95, 0.12), transparent 30%),
+        linear-gradient(180deg, #fbfbfd 0%, #f2f3f7 100%);
+      overflow-x: hidden;
     }
 
     body::before {
@@ -56,106 +52,67 @@
       inset: 0;
       pointer-events: none;
       z-index: 0;
-      background:
-        radial-gradient(700px circle at var(--mx) var(--my), rgba(255,255,255,0.07), transparent 44%);
-      opacity: 0.95;
+      background: radial-gradient(500px circle at var(--mx) var(--my), rgba(255,255,255,0.75), transparent 50%);
+      opacity: 0.9;
     }
 
-    .bg-grid,
-    .bg-noise,
-    .bg-rings,
-    .orb,
-    .scanline {
+    .aurora,
+    .noise,
+    .halo {
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 0;
     }
 
-    .bg-grid {
-      opacity: 0.3;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
-      background-size: 48px 48px;
-      mask-image: radial-gradient(circle at center, black 28%, transparent 82%);
-      -webkit-mask-image: radial-gradient(circle at center, black 28%, transparent 82%);
-      transform: translateY(calc(var(--scroll) * -0.03px));
-    }
-
-    .bg-noise {
-      opacity: 0.05;
-      background-image:
-        radial-gradient(circle at 18% 22%, #fff 0.6px, transparent 0.8px),
-        radial-gradient(circle at 72% 56%, #fff 0.6px, transparent 0.8px),
-        radial-gradient(circle at 42% 84%, #fff 0.6px, transparent 0.8px);
-      background-size: 26px 26px, 32px 32px, 22px 22px;
-    }
-
-    .scanline {
-      opacity: 0.05;
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), transparent 14%, transparent 86%, rgba(255,255,255,0.05));
-      animation: scan 8s linear infinite;
-    }
-
-    .bg-rings::before,
-    .bg-rings::after {
+    .aurora::before,
+    .aurora::after {
       content: "";
       position: absolute;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.06);
-      left: 50%;
-      top: 38%;
-      transform: translate(-50%, -50%);
-      animation: breathe 10s ease-in-out infinite;
-    }
-
-    .bg-rings::before {
-      width: 62vw;
-      height: 62vw;
-      max-width: 920px;
-      max-height: 920px;
-    }
-
-    .bg-rings::after {
-      width: 38vw;
-      height: 38vw;
-      max-width: 560px;
-      max-height: 560px;
-      animation-delay: -4s;
-    }
-
-    .orb {
-      border-radius: 999px;
-      filter: blur(90px);
-      opacity: 0.72;
+      filter: blur(80px);
+      opacity: 0.65;
       animation: float 16s ease-in-out infinite;
     }
 
-    .orb-a {
+    .aurora::before {
+      width: 420px;
+      height: 420px;
+      top: -100px;
+      left: -80px;
+      background: rgba(113, 157, 255, 0.22);
+    }
+
+    .aurora::after {
       width: 360px;
       height: 360px;
-      top: -120px;
-      left: -80px;
-      background: rgba(139, 92, 246, 0.22);
+      right: -80px;
+      top: 100px;
+      background: rgba(185, 120, 255, 0.18);
+      animation-delay: -7s;
     }
 
-    .orb-b {
-      width: 300px;
-      height: 300px;
-      top: 140px;
-      right: -70px;
-      background: rgba(6, 182, 212, 0.18);
-      animation-delay: -5s;
+    .halo::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 46%;
+      transform: translate(-50%, -50%);
+      width: min(78vw, 1000px);
+      height: min(78vw, 1000px);
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.42) 32%, transparent 68%);
+      opacity: 0.75;
+      animation: breathe 10s ease-in-out infinite;
     }
 
-    .orb-c {
-      width: 320px;
-      height: 320px;
-      bottom: -140px;
-      left: 18%;
-      background: rgba(255, 93, 177, 0.12);
-      animation-delay: -9s;
+    .noise {
+      opacity: 0.045;
+      background-image:
+        radial-gradient(circle at 20% 20%, #000 0.5px, transparent 0.8px),
+        radial-gradient(circle at 70% 55%, #000 0.5px, transparent 0.8px),
+        radial-gradient(circle at 40% 82%, #000 0.5px, transparent 0.8px);
+      background-size: 28px 28px, 34px 34px, 22px 22px;
     }
 
     .wrap {
@@ -170,33 +127,29 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding: 22px 0;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      padding: 20px 0;
     }
 
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       text-decoration: none;
       color: var(--text);
     }
 
     .brand-mark {
-      width: 46px;
-      height: 46px;
-      border-radius: 16px;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
       display: grid;
       place-items: center;
-      font-weight: 800;
+      font-weight: 700;
       letter-spacing: 0.08em;
-      background:
-        linear-gradient(135deg, rgba(139, 92, 246, 0.96), rgba(6, 182, 212, 0.96));
-      box-shadow: 0 16px 34px rgba(93, 96, 255, 0.34);
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(15, 17, 21, 0.08);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
     }
 
     .brand-copy {
@@ -206,553 +159,188 @@
     }
 
     .brand-copy strong {
-      font-size: 1rem;
+      font-size: 0.98rem;
       letter-spacing: -0.02em;
     }
 
     .brand-copy span {
-      color: var(--soft);
-      font-size: 0.86rem;
+      color: var(--muted);
+      font-size: 0.84rem;
     }
 
     .nav-link {
-      color: var(--text);
       text-decoration: none;
+      color: var(--text);
       padding: 12px 16px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--line);
-      transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(15, 17, 21, 0.08);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+      transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
     }
 
     .nav-link:hover {
-      transform: translateY(-2px);
-      background: rgba(255,255,255,0.10);
+      transform: translateY(-1px);
       border-color: var(--line-strong);
-    }
-
-    .glass {
-      position: relative;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05));
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      overflow: hidden;
-    }
-
-    .glass::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.06) 24%, transparent 56%);
-      transform: translateX(-120%);
-      opacity: 0.55;
-    }
-
-    .shine:hover::before {
-      animation: shine 1.1s ease;
+      background: rgba(255,255,255,0.86);
     }
 
     .hero {
-      min-height: calc(100vh - 92px);
+      min-height: calc(100vh - 84px);
       display: grid;
-      grid-template-columns: 1.04fr 0.96fr;
-      gap: 24px;
+      place-items: center;
+      text-align: center;
+      padding: 40px 0 80px;
+    }
+
+    .hero-inner {
+      max-width: 980px;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      padding: 24px 0 64px;
     }
 
-    .hero-copy {
-      padding-right: 10px;
-    }
-
-    .mini-pill {
+    .badge {
       display: inline-flex;
       align-items: center;
       gap: 10px;
       padding: 10px 14px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.68);
+      border: 1px solid rgba(15, 17, 21, 0.07);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow-soft);
       color: var(--muted);
       font-size: 0.92rem;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
 
-    .mini-dot {
-      width: 9px;
-      height: 9px;
+    .badge-dot {
+      width: 8px;
+      height: 8px;
       border-radius: 999px;
-      background: linear-gradient(135deg, var(--accent-2), var(--accent));
-      box-shadow: 0 0 18px rgba(6, 182, 212, 0.8);
+      background: #24c26a;
+      box-shadow: 0 0 16px rgba(36, 194, 106, 0.45);
     }
 
-    .domain-head {
+    h1 {
       margin: 0;
-      font-size: clamp(4rem, 10vw, 8.6rem);
+      font-size: clamp(4rem, 11vw, 8.8rem);
       line-height: 0.88;
-      letter-spacing: -0.085em;
-      max-width: 10ch;
+      letter-spacing: -0.10em;
+      font-weight: 700;
     }
 
-    .gradient-text {
-      background: linear-gradient(135deg, #ffffff 0%, #dfe6ff 26%, #7dd3fc 58%, #c084fc 100%);
+    .title-gradient {
+      background: linear-gradient(180deg, #0f1115 0%, #1a2333 58%, #3b4660 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
 
-    .hero-sub {
-      margin: 20px 0 0;
-      font-size: clamp(1.08rem, 1.9vw, 1.34rem);
-      color: rgba(255,255,255,0.9);
+    .subtitle {
+      margin: 22px 0 0;
+      font-size: clamp(1.1rem, 2.3vw, 1.5rem);
+      line-height: 1.45;
+      color: #2b3240;
       letter-spacing: -0.03em;
       max-width: 24ch;
     }
 
-    .hero-text {
-      margin: 18px 0 0;
-      max-width: 50ch;
+    .caption {
+      margin: 14px 0 0;
       color: var(--muted);
-      line-height: 1.9;
       font-size: 1rem;
+      line-height: 1.8;
     }
 
     .actions {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
-      margin-top: 30px;
+      justify-content: center;
+      margin-top: 34px;
     }
 
     .btn {
       position: relative;
+      min-height: 58px;
+      padding: 0 24px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      min-height: 58px;
-      padding: 0 22px;
-      border-radius: 18px;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 1rem;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      overflow: hidden;
+      letter-spacing: -0.01em;
       transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+      overflow: hidden;
     }
 
     .btn:hover {
-      transform: translateY(-2px);
+      transform: translateY(-1px);
     }
 
     .btn-primary {
-      color: #fff;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow: 0 18px 40px rgba(95, 104, 255, 0.34);
+      color: white;
+      background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+      box-shadow: 0 14px 30px rgba(17, 24, 39, 0.16);
     }
 
     .btn-primary::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.28) 50%, transparent 80%);
-      transform: translateX(-120%);
+      background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.22) 50%, transparent 80%);
+      transform: translateX(-130%);
     }
 
     .btn-primary:hover::before {
-      animation: btnShine 1s ease;
+      animation: sweep 1s ease;
     }
 
     .btn-secondary {
       color: var(--text);
-      background: rgba(255,255,255,0.07);
-      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(15, 17, 21, 0.08);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
     }
 
-    .meta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .meta-chip {
-      padding: 10px 13px;
+    .contact-card {
+      margin-top: 34px;
+      padding: 18px 22px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.055);
-      border: 1px solid rgba(255,255,255,0.10);
-      color: var(--soft);
-      font-size: 0.9rem;
-    }
-
-    .hero-visual {
-      perspective: 1500px;
-    }
-
-    .visual-shell {
-      padding: 18px;
-      border-radius: var(--radius-xl);
-      transform-style: preserve-3d;
-    }
-
-    .visual-inner {
-      position: relative;
-      min-height: 680px;
-      border-radius: 30px;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 84% 14%, rgba(6,182,212,0.16), transparent 22%),
-        radial-gradient(circle at 14% 18%, rgba(139,92,246,0.20), transparent 22%),
-        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03)),
-        linear-gradient(160deg, #0e1527 0%, #0b1120 44%, #10192c 100%);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 18px;
-      isolation: isolate;
-    }
-
-    .visual-inner::after {
-      content: "";
-      position: absolute;
-      inset: 20% -20% -20% 40%;
-      background: radial-gradient(circle, rgba(255,255,255,0.10), transparent 48%);
-      transform: translate3d(0, calc(var(--scroll) * -0.03px), 0);
-      z-index: -1;
-    }
-
-    .bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .bar-dots {
-      display: flex;
-      gap: 8px;
-    }
-
-    .bar-dots span {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.22);
-    }
-
-    .bar-url {
-      flex: 1;
-      min-width: 0;
-      border-radius: 999px;
-      padding: 10px 14px;
-      text-align: center;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.68);
-      font-size: 0.9rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .showcase {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 14px;
-      min-height: calc(100% - 50px);
-    }
-
-    .primary-card,
-    .secondary-card {
-      border-radius: 26px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.05);
-      overflow: hidden;
-    }
-
-    .primary-card {
-      position: relative;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background:
-        radial-gradient(circle at 90% 16%, rgba(255,93,177,0.14), transparent 18%),
-        radial-gradient(circle at 20% 20%, rgba(139,92,246,0.16), transparent 18%),
-        rgba(255,255,255,0.05);
-    }
-
-    .primary-card::before {
-      content: "";
-      position: absolute;
-      inset: auto -60px -60px auto;
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle, rgba(6,182,212,0.14), transparent 70%);
-      border-radius: 999px;
-      animation: pulseGlow 8s ease-in-out infinite;
-    }
-
-    .status-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .status {
+      background: rgba(255,255,255,0.66);
+      border: 1px solid rgba(15, 17, 21, 0.07);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow-soft);
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.10);
-      color: rgba(255,255,255,0.80);
-      font-size: 0.84rem;
-    }
-
-    .status i {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      display: inline-block;
-      background: var(--success);
-      box-shadow: 0 0 18px rgba(142, 244, 183, 0.8);
-    }
-
-    .tag {
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.10);
-      color: rgba(255,255,255,0.70);
-      font-size: 0.82rem;
-      background: rgba(255,255,255,0.04);
-    }
-
-    .overline {
-      margin: 0;
-      color: rgba(255,255,255,0.54);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 0.74rem;
-    }
-
-    .primary-name {
-      margin: 14px 0 0;
-      font-size: clamp(2.3rem, 4vw, 4.4rem);
-      line-height: 0.92;
-      letter-spacing: -0.07em;
-    }
-
-    .primary-copy {
-      margin: 14px 0 0;
-      color: rgba(255,255,255,0.72);
-      line-height: 1.8;
-      max-width: 26ch;
-    }
-
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 24px;
-    }
-
-    .chip-row span {
-      padding: 10px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.09);
-      color: rgba(255,255,255,0.82);
-      font-size: 0.88rem;
-    }
-
-    .secondary-stack {
-      display: grid;
-      grid-template-rows: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .secondary-card {
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.04));
-    }
-
-    .mini-label {
-      color: rgba(255,255,255,0.55);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 0.72rem;
-    }
-
-    .mini-title {
-      margin: 12px 0 0;
-      font-size: 1.24rem;
-      letter-spacing: -0.03em;
-    }
-
-    .secondary-card p {
-      margin: 10px 0 0;
-      color: rgba(255,255,255,0.70);
-      line-height: 1.75;
-      max-width: 26ch;
-    }
-
-    .metric {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .metric strong {
-      font-size: 2.3rem;
-      line-height: 1;
-      letter-spacing: -0.05em;
-    }
-
-    .section {
-      padding: 10px 0 92px;
-    }
-
-    .statement {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 20px;
-      align-items: center;
-      padding: 34px;
-      border-radius: var(--radius-xl);
-    }
-
-    .section-kicker {
-      margin: 0 0 10px;
-      color: rgba(255,255,255,0.54);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 0.76rem;
-    }
-
-    .statement h2 {
-      margin: 0;
-      font-size: clamp(1.9rem, 3.2vw, 3.3rem);
-      line-height: 1.02;
-      letter-spacing: -0.05em;
-      max-width: 16ch;
-    }
-
-    .statement p {
-      margin: 14px 0 0;
+      gap: 12px;
       color: var(--muted);
-      line-height: 1.85;
-      max-width: 58ch;
-    }
-
-    .statement-badge {
-      padding: 14px 18px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.06);
-      color: var(--text);
-      white-space: nowrap;
-      font-weight: 700;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 18px;
-    }
-
-    .card {
-      padding: 26px;
-      border-radius: var(--radius-lg);
-    }
-
-    .card-num {
-      width: 44px;
-      height: 44px;
-      border-radius: 15px;
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      margin-bottom: 16px;
-      background: linear-gradient(135deg, rgba(139,92,246,0.24), rgba(6,182,212,0.18));
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .card h3 {
-      margin: 0;
-      font-size: 1.18rem;
-      letter-spacing: -0.03em;
-    }
-
-    .card p {
-      margin: 12px 0 0;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .contact {
-      margin-top: 22px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 18px;
-      align-items: center;
-      padding: 30px;
-      border-radius: var(--radius-xl);
-    }
-
-    .contact h3 {
-      margin: 0;
-      font-size: clamp(1.5rem, 2.4vw, 2.4rem);
-      letter-spacing: -0.04em;
-    }
-
-    .contact p {
-      margin: 12px 0 0;
-      color: var(--muted);
-      line-height: 1.8;
-      max-width: 54ch;
-    }
-
-    .contact-line {
-      margin-top: 16px;
-      color: var(--soft);
       font-size: 0.95rem;
     }
 
-    .contact-line strong {
-      color: #fff;
-    }
-
-    .contact-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
+    .contact-card strong {
+      color: var(--text);
+      font-weight: 600;
     }
 
     .footer {
-      padding: 0 0 34px;
-      color: var(--soft);
-      font-size: 0.9rem;
+      padding: 0 0 28px;
       text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
     }
 
     .reveal {
       opacity: 0;
-      transform: translateY(22px);
+      transform: translateY(18px);
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
@@ -761,29 +349,21 @@
       transform: translateY(0);
     }
 
-    .tilt {
-      transform-style: preserve-3d;
-      transition: transform 0.18s ease;
-      will-change: transform;
-    }
-
     .toast {
       position: fixed;
       left: 50%;
       bottom: 24px;
       transform: translateX(-50%) translateY(10px);
-      background: rgba(8, 12, 24, 0.94);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.12);
       padding: 12px 16px;
       border-radius: 999px;
+      background: rgba(17, 24, 39, 0.92);
+      color: white;
       font-size: 0.95rem;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.26s ease, transform 0.26s ease;
-      z-index: 30;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 20;
+      box-shadow: 0 16px 40px rgba(17, 24, 39, 0.22);
     }
 
     .toast.show {
@@ -792,94 +372,42 @@
     }
 
     @keyframes float {
-      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-      50% { transform: translate3d(18px, 20px, 0) scale(1.05); }
+      0%, 100% { transform: translate3d(0,0,0) scale(1); }
+      50% { transform: translate3d(16px,18px,0) scale(1.05); }
     }
 
     @keyframes breathe {
-      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
-      50% { transform: translate(-50%, -50%) scale(1.06); opacity: 0.55; }
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.78; }
+      50% { transform: translate(-50%, -50%) scale(1.04); opacity: 0.55; }
     }
 
-    @keyframes pulseGlow {
-      0%, 100% { transform: scale(1); opacity: 0.9; }
-      50% { transform: scale(1.08); opacity: 0.55; }
+    @keyframes sweep {
+      to { transform: translateX(130%); }
     }
 
-    @keyframes shine {
-      100% { transform: translateX(160%); }
-    }
-
-    @keyframes btnShine {
-      to { transform: translateX(120%); }
-    }
-
-    @keyframes scan {
-      0% { transform: translateY(-8%); }
-      100% { transform: translateY(8%); }
-    }
-
-    @media (max-width: 1100px) {
-      .hero,
-      .statement,
-      .contact {
-        grid-template-columns: 1fr;
-      }
-
-      .showcase {
-        grid-template-columns: 1fr;
-      }
-
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        min-height: auto;
-        padding-top: 16px;
-      }
-
-      .statement-badge {
-        width: fit-content;
-      }
-
-      .contact-actions {
-        justify-content: flex-start;
-      }
-    }
-
-    @media (max-width: 760px) {
+    @media (max-width: 720px) {
       .nav-link {
         display: none;
       }
 
-      .hero-copy {
-        padding-right: 0;
-      }
-
-      .visual-inner {
-        min-height: auto;
-      }
-
-      .actions,
-      .contact-actions {
+      .actions {
         flex-direction: column;
+        width: 100%;
+        max-width: 360px;
       }
 
       .btn {
         width: 100%;
       }
 
-      .meta-row {
+      .contact-card {
+        width: 100%;
+        max-width: 360px;
+        justify-content: center;
+        text-align: center;
+        border-radius: 22px;
         flex-direction: column;
-      }
-
-      .statement,
-      .card,
-      .contact,
-      .visual-shell {
-        padding-left: 20px;
-        padding-right: 20px;
+        gap: 6px;
       }
     }
 
@@ -900,13 +428,9 @@
   </style>
 </head>
 <body>
-  <div class="bg-grid"></div>
-  <div class="bg-noise"></div>
-  <div class="bg-rings"></div>
-  <div class="scanline"></div>
-  <div class="orb orb-a"></div>
-  <div class="orb orb-b"></div>
-  <div class="orb orb-c"></div>
+  <div class="aurora"></div>
+  <div class="halo"></div>
+  <div class="noise"></div>
 
   <div class="wrap">
     <nav class="nav">
@@ -914,152 +438,41 @@
         <div class="brand-mark">JP</div>
         <div class="brand-copy">
           <strong>jovipoint.sk</strong>
-          <span>prémiová doména</span>
+          <span>doména na predaj</span>
         </div>
       </a>
 
-      <a class="nav-link" href="#kontakt">Kontakt</a>
+      <a class="nav-link" href="mailto:peter.stefanec10@gmail.com?subject=Záujem o doménu jovipoint.sk">Kontakt</a>
     </nav>
 
-    <section class="hero">
-      <div class="hero-copy reveal">
-        <div class="mini-pill">
-          <span class="mini-dot"></span>
+    <main class="hero">
+      <div class="hero-inner reveal">
+        <div class="badge">
+          <span class="badge-dot"></span>
           <span>available now</span>
         </div>
 
-        <h1 class="domain-head">
-          <span class="gradient-text">jovipoint.sk</span>
-        </h1>
+        <h1><span class="title-gradient">jovipoint.sk</span></h1>
 
-        <p class="hero-sub">Prémiová doména pre silnú značku.</p>
-
-        <p class="hero-text">
-          Ak je táto doména presne to, čo hľadáte, napíšte mi.
-        </p>
+        <p class="subtitle">Doména na predaj.</p>
+        <p class="caption">Ak ju chcete pre svoju značku, ozvite sa.</p>
 
         <div class="actions">
           <a class="btn btn-primary" href="mailto:peter.stefanec10@gmail.com?subject=Záujem o doménu jovipoint.sk">
             Napísať e-mail
           </a>
-          <button class="btn btn-secondary" id="copyTop" type="button">
+
+          <button class="btn btn-secondary" id="copyEmailBtn" type="button">
             Kopírovať kontakt
           </button>
         </div>
 
-        <div class="meta-row">
-          <div class="meta-chip">peter.stefanec10@gmail.com</div>
-          <div class="meta-chip">na dohodu</div>
-          <div class="meta-chip">GitHub Pages ready</div>
+        <div class="contact-card">
+          <span>Kontakt</span>
+          <strong>peter.stefanec10@gmail.com</strong>
         </div>
       </div>
-
-      <div class="hero-visual reveal">
-        <div class="glass visual-shell shine tilt">
-          <div class="visual-inner">
-            <div class="bar">
-              <div class="bar-dots"><span></span><span></span><span></span></div>
-              <div class="bar-url">https://jovipoint.sk</div>
-            </div>
-
-            <div class="showcase">
-              <div class="primary-card">
-                <div class="status-row">
-                  <div class="status"><i></i><span>available</span></div>
-                  <div class="tag">premium</div>
-                </div>
-
-                <div>
-                  <p class="overline">custom domain</p>
-                  <h2 class="primary-name">jovipoint.sk</h2>
-                  <p class="primary-copy">
-                    Čistá, výrazná a pripravená pre ďalší krok.
-                  </p>
-
-                  <div class="chip-row">
-                    <span>brand-ready</span>
-                    <span>minimal</span>
-                    <span>modern</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="secondary-stack">
-                <div class="secondary-card">
-                  <div>
-                    <div class="mini-label">for the brand</div>
-                    <h3 class="mini-title">Ak sedí, ozvite sa.</h3>
-                    <p>Krátko. Elegantne. Priamo.</p>
-                  </div>
-                </div>
-
-                <div class="secondary-card">
-                  <div>
-                    <div class="mini-label">showcase</div>
-                    <h3 class="mini-title">Takto môže vyzerať aj váš web.</h3>
-                    <p>Presný vizuál. Silný prvý dojem.</p>
-                  </div>
-
-                  <div class="metric">
-                    <span style="color: rgba(255,255,255,0.56)">premium feel</span>
-                    <strong>01</strong>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="glass statement reveal">
-        <div>
-          <p class="section-kicker">jovipoint</p>
-          <h2>Doména, ktorá si pýta pokračovanie.</h2>
-          <p>Minimalistický landing page. Prémiový dojem. Priamy kontakt.</p>
-        </div>
-
-        <div class="statement-badge">jovipoint.sk • available</div>
-      </div>
-
-      <div class="cards">
-        <div class="glass card reveal tilt">
-          <div class="card-num">01</div>
-          <h3>Zapamätateľnosť</h3>
-          <p>Krátky názov. Čistá identita. Silný brand signal.</p>
-        </div>
-
-        <div class="glass card reveal tilt">
-          <div class="card-num">02</div>
-          <h3>Luxusný minimalizmus</h3>
-          <p>Veľa priestoru. Málo slov. Presný vizuálny rytmus.</p>
-        </div>
-
-        <div class="glass card reveal tilt">
-          <div class="card-num">03</div>
-          <h3>Aj ako showcase</h3>
-          <p>Ak chcete podobný web, rád navrhnem aj ten.</p>
-        </div>
-      </div>
-
-      <div class="glass contact reveal tilt" id="kontakt">
-        <div>
-          <h3>Záujem o doménu alebo podobný web?</h3>
-          <p>Stačí jeden e-mail.</p>
-          <div class="contact-line">Kontakt: <strong>peter.stefanec10@gmail.com</strong></div>
-        </div>
-
-        <div class="contact-actions">
-          <a class="btn btn-primary" href="mailto:peter.stefanec10@gmail.com?subject=Záujem o doménu jovipoint.sk">
-            Napísať e-mail
-          </a>
-          <button class="btn btn-secondary" id="copyBottom" type="button">
-            Kopírovať e-mail
-          </button>
-        </div>
-      </div>
-    </section>
+    </main>
 
     <div class="footer">jovipoint.sk</div>
   </div>
@@ -1084,74 +497,33 @@
           return;
         }
 
-        const area = document.createElement("textarea");
-        area.value = email;
-        area.style.position = "fixed";
-        area.style.opacity = "0";
-        document.body.appendChild(area);
-        area.focus();
-        area.select();
+        const helper = document.createElement("textarea");
+        helper.value = email;
+        helper.style.position = "fixed";
+        helper.style.opacity = "0";
+        document.body.appendChild(helper);
+        helper.focus();
+        helper.select();
         document.execCommand("copy");
-        document.body.removeChild(area);
+        document.body.removeChild(helper);
         showToast();
       } catch (e) {
         window.location.href = "mailto:" + email + "?subject=Záujem o doménu jovipoint.sk";
       }
     }
 
-    document.getElementById("copyTop").addEventListener("click", copyEmail);
-    document.getElementById("copyBottom").addEventListener("click", copyEmail);
+    document.getElementById("copyEmailBtn").addEventListener("click", copyEmail);
 
     if (!prefersReducedMotion) {
-      const revealItems = document.querySelectorAll(".reveal");
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add("visible");
-        });
-      }, { threshold: 0.15 });
-
-      revealItems.forEach((el) => observer.observe(el));
-
-      const tiltItems = document.querySelectorAll(".tilt");
-      tiltItems.forEach((card) => {
-        card.addEventListener("mousemove", (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const px = x / rect.width;
-          const py = y / rect.height;
-
-          const rotateY = (px - 0.5) * 8;
-          const rotateX = (0.5 - py) * 8;
-
-          card.style.transform =
-            `perspective(1400px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`;
-        });
-
-        card.addEventListener("mouseleave", () => {
-          card.style.transform =
-            "perspective(1400px) rotateX(0deg) rotateY(0deg) translateY(0)";
-        });
-      });
-
-      let ticking = false;
+      const reveal = document.querySelector(".reveal");
+      requestAnimationFrame(() => reveal.classList.add("visible"));
 
       window.addEventListener("mousemove", (e) => {
         document.documentElement.style.setProperty("--mx", e.clientX + "px");
         document.documentElement.style.setProperty("--my", e.clientY + "px");
       });
-
-      window.addEventListener("scroll", () => {
-        if (!ticking) {
-          window.requestAnimationFrame(() => {
-            document.documentElement.style.setProperty("--scroll", window.scrollY);
-            ticking = false;
-          });
-          ticking = true;
-        }
-      });
     } else {
-      document.querySelectorAll(".reveal").forEach((el) => el.classList.add("visible"));
+      document.querySelector(".reveal").classList.add("visible");
     }
   </script>
 </body>
