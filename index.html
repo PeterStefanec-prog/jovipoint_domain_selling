@@ -1,36 +1,957 @@
 <!doctype html>
 <html lang="sk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>jovipoint.sk je na predaj</title>
+  <meta
+    name="description"
+    content="Doména jovipoint.sk je na predaj. Ak máte záujem o kúpu, ozvite sa e-mailom."
+  />
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 700px;
-      margin: 80px auto;
-      padding: 20px;
-      text-align: center;
-      line-height: 1.6;
+    :root {
+      --bg: #070b14;
+      --bg-2: #0d1322;
+      --card: rgba(255, 255, 255, 0.08);
+      --card-strong: rgba(255, 255, 255, 0.12);
+      --text: #f7f8fb;
+      --muted: rgba(247, 248, 251, 0.74);
+      --soft: rgba(247, 248, 251, 0.54);
+      --line: rgba(255, 255, 255, 0.12);
+      --accent: #8b5cf6;
+      --accent-2: #06b6d4;
+      --accent-3: #ec4899;
+      --success: #86efac;
+      --shadow: 0 20px 80px rgba(0, 0, 0, 0.45);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --container: 1180px;
     }
-    h1 { font-size: 2.2rem; }
-    p { font-size: 1.1rem; color: #444; }
-    a.button {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 20px;
-      background: black;
-      color: white;
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(139, 92, 246, 0.30), transparent 28%),
+        radial-gradient(circle at 85% 18%, rgba(6, 182, 212, 0.23), transparent 26%),
+        radial-gradient(circle at 75% 75%, rgba(236, 72, 153, 0.20), transparent 24%),
+        linear-gradient(180deg, #0a0f1d 0%, #070b14 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .bg-orb {
+      position: fixed;
+      inset: auto;
+      border-radius: 999px;
+      filter: blur(80px);
+      pointer-events: none;
+      opacity: 0.75;
+      z-index: 0;
+      animation: float 16s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      top: -120px;
+      left: -100px;
+      width: 340px;
+      height: 340px;
+      background: rgba(139, 92, 246, 0.22);
+    }
+
+    .orb-2 {
+      top: 120px;
+      right: -60px;
+      width: 300px;
+      height: 300px;
+      background: rgba(6, 182, 212, 0.18);
+      animation-delay: -4s;
+    }
+
+    .orb-3 {
+      bottom: -100px;
+      left: 20%;
+      width: 320px;
+      height: 320px;
+      background: rgba(236, 72, 153, 0.14);
+      animation-delay: -8s;
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.06;
+      background-image:
+        radial-gradient(circle at 20% 20%, #fff 0.4px, transparent 0.6px),
+        radial-gradient(circle at 80% 50%, #fff 0.4px, transparent 0.6px),
+        radial-gradient(circle at 40% 80%, #fff 0.4px, transparent 0.6px);
+      background-size: 26px 26px, 34px 34px, 22px 22px;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      width: min(calc(100% - 32px), var(--container));
+      margin: 0 auto;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
       text-decoration: none;
-      border-radius: 8px;
+      color: var(--text);
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background:
+        linear-gradient(135deg, rgba(139, 92, 246, 0.95), rgba(6, 182, 212, 0.95));
+      display: grid;
+      place-items: center;
+      box-shadow: 0 12px 34px rgba(98, 84, 255, 0.32);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+    }
+
+    .brand-text strong {
+      font-size: 0.98rem;
+    }
+
+    .brand-text span {
+      color: var(--soft);
+      font-size: 0.86rem;
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .hero {
+      padding: 36px 0 44px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: center;
+      min-height: calc(100vh - 84px);
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05));
+      border: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 34px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent));
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.8);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.8rem, 5.5vw, 5.6rem);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      max-width: 11ch;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 0%, #b3c5ff 35%, #7dd3fc 65%, #c084fc 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      margin: 24px 0 0;
+      max-width: 62ch;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 1.55vw, 1.22rem);
+      line-height: 1.85;
+    }
+
+    .lead strong {
+      color: #fff;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 56px;
+      padding: 0 22px;
+      border-radius: 18px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 18px 40px rgba(97, 103, 255, 0.34);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+
+    .meta-row {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .meta-chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--soft);
+      font-size: 0.92rem;
+    }
+
+    .hero-card {
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -30% auto auto -10%;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(139,92,246,0.28), transparent 65%);
+      pointer-events: none;
+    }
+
+    .mock {
+      position: relative;
+      min-height: 560px;
+      border-radius: 24px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03)),
+        linear-gradient(160deg, #0f1729 0%, #0b1220 40%, #111827 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 18px;
+    }
+
+    .mock-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.22);
+    }
+
+    .mock-url {
+      flex: 1;
+      min-width: 0;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.72);
+      font-size: 0.9rem;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mock-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 14px;
+      height: calc(100% - 48px);
+    }
+
+    .mock-main,
+    .mock-side,
+    .mock-bottom-card {
+      border-radius: 22px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .mock-main {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(6,182,212,0.18), transparent 22%),
+        radial-gradient(circle at 20% 20%, rgba(139,92,246,0.16), transparent 18%),
+        rgba(255,255,255,0.05);
+    }
+
+    .mock-kicker {
+      display: inline-flex;
+      width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.09);
+      color: rgba(255,255,255,0.75);
+      font-size: 0.84rem;
+    }
+
+    .mock-headline {
+      margin: 18px 0 0;
+      font-size: clamp(1.8rem, 2.3vw, 2.5rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .mock-text {
+      color: rgba(255,255,255,0.72);
+      line-height: 1.75;
+      margin-top: 14px;
+      max-width: 36ch;
+    }
+
+    .mock-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .mock-badges span {
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.09);
+      color: rgba(255,255,255,0.8);
+      font-size: 0.88rem;
+    }
+
+    .mock-side {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 14px;
+      background: transparent;
+      border: none;
+    }
+
+    .mock-bottom-card {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 180px;
+    }
+
+    .mock-bottom-card strong {
+      font-size: 1.02rem;
+    }
+
+    .mock-bottom-card p {
+      margin: 8px 0 0;
+      color: rgba(255,255,255,0.68);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .mock-stat {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .mock-stat b {
+      font-size: 2.2rem;
+      letter-spacing: -0.04em;
+    }
+
+    .section {
+      padding: 24px 0 80px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
+      border: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.22), rgba(6, 182, 212, 0.18));
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 1.25rem;
+    }
+
+    .card h2,
+    .card h3 {
+      margin: 0;
+      letter-spacing: -0.03em;
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin: 14px 0 0;
+    }
+
+    .statement {
+      padding: 34px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      margin-top: 22px;
+    }
+
+    .statement h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .statement p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 70ch;
+    }
+
+    .statement .pill {
+      padding: 14px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      white-space: nowrap;
+      font-weight: 700;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .quote {
+      padding: 28px;
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(circle at 90% 10%, rgba(236,72,153,0.15), transparent 20%),
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .quote p {
+      margin: 0;
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    .quote strong {
+      color: #fff;
+    }
+
+    .footer-card {
+      margin-top: 22px;
+      padding: 26px;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(139,92,246,0.16), transparent 26%),
+        radial-gradient(circle at 100% 0%, rgba(6,182,212,0.14), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-card h3 {
+      margin: 0;
+      font-size: clamp(1.3rem, 2vw, 2rem);
+      letter-spacing: -0.03em;
+    }
+
+    .footer-card p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 60ch;
+    }
+
+    .footer-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .fine {
+      color: var(--soft);
+      font-size: 0.94rem;
+      line-height: 1.7;
+      margin-top: 18px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .copied {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%) translateY(10px);
+      background: rgba(8, 12, 24, 0.92);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+    }
+
+    .copied.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) translateX(0) scale(1);
+      }
+      50% {
+        transform: translateY(20px) translateX(10px) scale(1.04);
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .about,
+      .statement {
+        grid-template-columns: 1fr;
+      }
+
+      .mock-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 18px;
+      }
+
+      .statement .pill {
+        width: fit-content;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        padding-top: 14px;
+      }
+
+      .hero-copy,
+      .card,
+      .quote,
+      .statement,
+      .footer-card,
+      .mock {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      h1 {
+        max-width: none;
+      }
+
+      .cta-row,
+      .footer-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .mock {
+        min-height: auto;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Doména jovipoint.sk je na predaj</h1>
-  <p>Ak máte záujem o kúpu tejto domény, kontaktujte ma e-mailom.</p>
-  <a class="button" href="mailto:peter.stefanec10@gmail.com?subject=Záujem o doménu jovipoint.sk">
-    Napísať e-mail
-  </a>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+  <div class="noise"></div>
+
+  <div class="wrap">
+    <nav class="nav">
+      <a class="brand" href="#">
+        <div class="brand-mark">JP</div>
+        <div class="brand-text">
+          <strong>jovipoint.sk</strong>
+          <span>prémiová doména na dohodu</span>
+        </div>
+      </a>
+
+      <a class="nav-cta" href="mailto:peter.stefanec10@gmail.com?subject=Záujem o doménu jovipoint.sk">
+        Kontaktovať ma
+      </a>
+    </nav>
+
+    <section class="hero">
+      <div class="panel hero-copy reveal">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          <span>Dizajnový landing page + doména na predaj</span>
+        </div>
+
+        <h1>
+          Doména
+          <span class="gradient-text">jovipoint.sk</span>
+          je na predaj.
+        </h1>
+
+        <p class="lead">
+          Ak ste sa sem dostali kvôli značke <strong>Jovipoint</strong>, úplne chápem prečo.
+          Názov má energiu, zapamätateľnosť a potenciál na silnú značku.
+          A úprimne? Tento projekt si zaslúži web, ktorý vyzerá rovnako dobre ako samotný názov.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="mailto:peter.stefanec10@gmail.com?subject=Záujem o doménu jovipoint.sk">
+            Napísať e-mail
+          </a>
+          <button class="btn btn-secondary" id="copyEmailBtn" type="button">
+            Skopírovať kontakt
+          </button>
+        </div>
+
+        <div class="meta-row">
+          <div class="meta-chip">Kontakt: peter.stefanec10@gmail.com</div>
+          <div class="meta-chip">Korektná dohoda</div>
+          <div class="meta-chip">Rýchla komunikácia</div>
+        </div>
+      </div>
+
+      <div class="panel hero-card reveal">
+        <div class="mock">
+          <div class="mock-topbar">
+            <div class="dots">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="mock-url">https://jovipoint.sk</div>
+          </div>
+
+          <div class="mock-grid">
+            <div class="mock-main">
+              <div>
+                <div class="mock-kicker">Silný brand. Silná doména. Silný prvý dojem.</div>
+                <h2 class="mock-headline">Web, ktorý otvorí oči ešte pred prvým scrollom.</h2>
+                <p class="mock-text">
+                  Táto stránka nie je len oznam, že doména je na predaj.
+                  Je to zároveň malá ukážka toho, ako môže vyzerať moderný, čistý
+                  a premyslený landing page.
+                </p>
+              </div>
+
+              <div class="mock-badges">
+                <span>Premium feel</span>
+                <span>GitHub Pages ready</span>
+                <span>Rýchly loading</span>
+              </div>
+            </div>
+
+            <div class="mock-side">
+              <div class="mock-bottom-card">
+                <strong>Pre značku Jovipoint</strong>
+                <p>
+                  Ak si to ty, Jovinečko, alebo niekto z tímu, kľudne sa ozvite.
+                  Doménu rád predám, ak sa rozumne dohodneme.
+                </p>
+              </div>
+
+              <div class="mock-bottom-card">
+                <div>
+                  <strong>Nie je to trolling</strong>
+                  <p>
+                    Tento názov som mal v hlave pre vlastný projekt ešte skôr,
+                    než som o Jovipointe vedel.
+                  </p>
+                </div>
+                <div class="mock-stat">
+                  <span style="color: rgba(255,255,255,0.62);">Prvý dojem</span>
+                  <b>10/10</b>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="grid-3">
+        <div class="card reveal">
+          <div class="card-icon">✨</div>
+          <h3>Zapamätateľný názov</h3>
+          <p>
+            Krátky, výrazný a brandovateľný. Presne ten typ domény, ktorý sa ľuďom
+            usadí v hlave po jednom videní.
+          </p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-icon">⚡</div>
+          <h3>Čistý moderný štýl</h3>
+          <p>
+            Minimalizmus, svetlo, kontrast, pohyb, atmosféra. Dizajn, ktorý pôsobí
+            draho aj bez zbytočného chaosu.
+          </p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-icon">🚀</div>
+          <h3>Aj ako moja vizitka</h3>
+          <p>
+            Áno, toto je aj malá reklama na mňa. Ak chceš niečo podobne čisté,
+            moderné a nápadité, pokojne sa ozvi tiež.
+          </p>
+        </div>
+      </div>
+
+      <div class="panel statement reveal">
+        <div>
+          <h2>Jovipoint je super koncept. Táto doména si pýta pokračovanie.</h2>
+          <p>
+            Ak ste tím okolo Jovipointu, túto doménu posuniem rád ďalej niekomu,
+            komu bude naozaj dávať zmysel. Nerobím z toho drámu, len hľadám férovú dohodu.
+            A keď už sa človek baví o dobrej značke, bola by škoda nechať ju bez dobrej domény.
+          </p>
+        </div>
+
+        <div class="pill">jovipoint.sk • dostupná na dohodu</div>
+      </div>
+
+      <div class="about">
+        <div class="quote reveal">
+          <p>
+            <strong>Ak si priamo ty, Jovinečko,</strong> alebo niekto z tvojho tímu,
+            kľudne sa mi ozvite. Doménu predám rád, ak sa rozumne dohodneme.
+            Všetko úplne normálne, slušne a bez zbytočných hier.
+          </p>
+        </div>
+
+        <div class="quote reveal">
+          <p>
+            <strong>Pôvodne som chcel pod týmto názvom rozbehnúť vlastný projekt</strong>
+            ešte predtým, než som o Jovipointe vedel. Preto je táto stránka napísaná
+            normálne a s rešpektom. A zároveň ukazuje, ako môže vyzerať jednoduchý,
+            ale silný web.
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-card reveal">
+        <div>
+          <h3>Ak máte záujem o doménu alebo podobný web, ozvite sa.</h3>
+          <p>
+            Stačí jeden mail. Či už ide o kúpu domény <strong>jovipoint.sk</strong>,
+            alebo o to, že chcete vlastný moderný landing page v podobnom štýle.
+          </p>
+          <div class="fine">
+            Kontakt: <strong>peter.stefanec10@gmail.com</strong>
+          </div>
+        </div>
+
+        <div class="footer-actions">
+          <a class="btn btn-primary" href="mailto:peter.stefanec10@gmail.com?subject=Záujem o doménu jovipoint.sk">
+            Napísať e-mail
+          </a>
+          <button class="btn btn-secondary" id="copyEmailBtnBottom" type="button">
+            Kopírovať e-mail
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="copied" id="copiedToast">E-mail skopírovaný</div>
+
+  <script>
+    const email = "peter.stefanec10@gmail.com";
+    const copiedToast = document.getElementById("copiedToast");
+
+    function showToast() {
+      copiedToast.classList.add("show");
+      setTimeout(() => copiedToast.classList.remove("show"), 1800);
+    }
+
+    async function copyEmail() {
+      try {
+        await navigator.clipboard.writeText(email);
+        showToast();
+      } catch (err) {
+        window.location.href = "mailto:" + email + "?subject=Záujem o doménu jovipoint.sk";
+      }
+    }
+
+    document.getElementById("copyEmailBtn").addEventListener("click", copyEmail);
+    document.getElementById("copyEmailBtnBottom").addEventListener("click", copyEmail);
+
+    const revealElements = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+        }
+      });
+    }, { threshold: 0.14 });
+
+    revealElements.forEach((el) => observer.observe(el));
+  </script>
 </body>
 </html>
